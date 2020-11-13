@@ -27,7 +27,7 @@ class Image_Classifier:
 		car_color_classifier = classifier.Classifier()
 
 		# load the COCO class labels our YOLO model was trained on
-		labelsPath = os.path.sep.join(self.labels_path, "coco.names"])
+		labelsPath = os.path.sep.join(self.labels_path, "coco.names")
 		LABELS = open(labelsPath).read().strip().split("\n")
 
 		# initialize a list of colors to represent each possible class label
