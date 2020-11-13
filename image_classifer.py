@@ -17,7 +17,7 @@ DEFAULT_CONFIDENCE_VALUE = 0.5
 DEFAULT_THRESHOLD_VALUE = 0.3
 
 class Image_Classifier:
-	def __init__(self, confidence=DEFAULT_CONFIDENCE_VALUE, threshold=DEFAULT_THRESHOLD_VALUE, labels_path=YOLO_COCO_BASE_PATH, image_path):
+	def __init__(self, image_path, confidence=DEFAULT_CONFIDENCE_VALUE, threshold=DEFAULT_THRESHOLD_VALUE, labels_path=YOLO_COCO_BASE_PATH):
 		self.confidence = confidence
 		self.threshold = threshold
 		self.labels_path = labels_path
@@ -27,7 +27,7 @@ class Image_Classifier:
 		car_color_classifier = classifier.Classifier()
 
 		# load the COCO class labels our YOLO model was trained on
-		labelsPath = os.path.sep.join(self.labels_path, "coco.names")
+		labelsPath = os.path.sep.join([self.labels_path, "coco.names"])
 		LABELS = open(labelsPath).read().strip().split("\n")
 
 		# initialize a list of colors to represent each possible class label
@@ -36,8 +36,8 @@ class Image_Classifier:
 			dtype="uint8")
 
 		# derive the paths to the YOLO weights and model configuration
-		weightsPath = os.path.sep.join(self.labels_path, "yolov3.weights"])
-		configPath = os.path.sep.join(self.labels_path, "yolov3.cfg"])
+		weightsPath = os.path.sep.join([self.labels_path, "yolov3.weights"])
+		configPath = os.path.sep.join([self.labels_path, "yolov3.cfg"])
 
 		# load our YOLO object detector trained on COCO dataset (80 classes)
 		print("[INFO] loading YOLO from disk...")
