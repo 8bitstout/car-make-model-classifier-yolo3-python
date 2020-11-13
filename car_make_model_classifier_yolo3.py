@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright © 2019 by Spectrico
 # Licensed under the MIT License
 # Based on the tutorial by Adrian Rosebrock: https://www.pyimagesearch.com/2018/11/12/yolo-object-detection-with-opencv/
@@ -11,15 +12,19 @@ import cv2
 import os
 import classifier
 
+YOLO_COCO_BASE_PATH = 'yolo-coco'
+DEFAULT_CONFIDENCE_VALUE = 0.5
+DEFAULT_THRESHOLD_VALUE = 0.3
+
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
 	help="path to input image")
-ap.add_argument("-y", "--yolo", default='yolo-coco',
+ap.add_argument("-y", "--yolo", default=YOLO_COCO_BASE_PATH,
 	help="base path to YOLO directory")
-ap.add_argument("-c", "--confidence", type=float, default=0.5,
+ap.add_argument("-c", "--confidence", type=float, default=DEFAULT_CONFIDENCE_VALUE,
 	help="minimum probability to filter weak detections")
-ap.add_argument("-t", "--threshold", type=float, default=0.3,
+ap.add_argument("-t", "--threshold", type=float, default=DEFAULT_THRESHOLD_VALUE,
 	help="threshold when applying non-maxima suppression")
 args = vars(ap.parse_args())
 
@@ -130,11 +135,12 @@ if len(idxs) > 0:
 		text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
 		cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
 			0.5, color, 2)
+		print("Car is a: {name}".format(name=result[0]['make']))
 
 # show the output image
-cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
-cv2.resizeWindow('Image', W, H)
-cv2.imshow("Image", image)
-cv2.imwrite("output.jpg", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
+# cv2.resizeWindow('Image', W, H)
+# cv2.imshow("Image", image)
+# cv2.imwrite("output.jpg", image)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
